@@ -407,6 +407,30 @@ def delete_hosts(hosts=None):
             host.delete()
 
 
+def toggle_host_repos_only(hosts=None, host_repos_only=True):
+    """ Toggle host_repos_only for a host or matching pattern of hosts
+    """
+    if hosts:
+        matching_hosts = get_hosts(hosts)
+        for host in matching_hosts:
+            text = '[X] host_repos_only: {0!s}:'.format(host.hostname)
+            info_message.send(sender=None, text=text)
+            host.host_repos_only = host_repos_only
+            host.save()
+
+
+def toggle_host_check_dns(hosts=None, check_dns=True):
+    """ Toggle check_dns for a host or matching pattern of hosts
+    """
+    if hosts:
+        matching_hosts = get_hosts(hosts)
+        for host in matching_hosts:
+            text = '[X] check_dns: {0!s}:'.format(host.hostname)
+            info_message.send(sender=None, text=text)
+            host.check_dns = check_dns
+            host.save()
+
+
 def dns_checks(host=None):
     """ Check all hosts for reverse DNS mismatches, specify host for a single
         host
@@ -512,6 +536,20 @@ def collect_args():
         '-A', '--host-updates-alt', action='store_true',
         help='Find Host updates (alternative algorithm that may be faster \
         when there are many homogeneous hosts)')
+    hro_group = parser.add_mutually_exclusive_group()
+    hro_group.add_argument(
+        '-shro' '--set-host-repos-only', action='store_true',
+        help='Set host_repos_only, requires -H, matches substring patterns')
+    hro_group.add_argument(
+        '-uhro' '--unset-host-repos-only', action='store_true',
+        help='Unset host_repos_only, requires -H, matches substring patterns')
+    dns_group = parser.add_mutually_exclusive_group()
+    dns_group.add_argument(
+        '-sdns' '--set-host-dns-check', action='store_true',
+        help='Set check_dns, requires -H, matches substring patterns')
+    dns_group.add_argument(
+        '-udns' '--unset-host-dns-check', action='store_true',
+        help='Unset check_dns, requires -H, matches substring patterns')
     parser.add_argument(
         '-H', '--host',
         help='Only perform action on a specific Host (fqdn)')
@@ -563,6 +601,22 @@ def process_args(args):
         return False
     if args.delete_hosts:
         delete_hosts(args.host)
+        showhelp = False
+        return False
+    if args.shro:
+        toggle_host_repos_only(args.host)
+        showhelp = False
+        return False
+    elif args.uhro:
+        toggle_host_repos_only(args.host, False)
+        showhelp = False
+        return False
+    if args.sdns:
+        toggle_host_check_dns(args.host)
+        showhelp = False
+        return False
+    elif args.udns:
+        toggle_host_check_dns(args.host, False)
         showhelp = False
         return False
     if args.diff:
