@@ -1,1 +1,2 @@
-33 6 * * * patchman -a >> /var/log/patchman.log 2>&1
+15 9 * * * /usr/bin/patchman -r -u -p -c -d >> /var/log/patchman.log 2>&1
+20 5 * * 1 /usr/bin/python3 /mail_report.py

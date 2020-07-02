@@ -11,6 +11,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         python-mysqldb \
         python-pymysql \
+        python3-pymysql \
         mysql-client-5.7 \
         python-magic \
         cron \
