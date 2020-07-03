@@ -12,6 +12,7 @@ services:
       - ./files/local_settings.py:/etc/patchman/local_settings.py
       - ./files/patchman.conf:/etc/apache2/conf-available/patchman.conf
       - ./files/mail_report.py:/mail_report.py
+      - ./files/remove_old_hosts.py:/remove_old_hosts.py
 
   database:
     image: mysql:5.7
