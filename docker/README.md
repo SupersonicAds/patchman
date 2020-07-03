@@ -4,6 +4,10 @@
 
 Change value for variable `SECRET_KEY` in file `files/local_settings.py`
 
+## Define variables for mail reports
+
+Change SMTP and DB credentials, mail addresses in `files/mail_report.py`
+
 ## Run the docker compose
 
 ```
