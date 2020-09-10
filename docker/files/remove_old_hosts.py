@@ -4,10 +4,10 @@ import pymysql
 import os
 import time
 
-DB_HOST = 'database'
+DB_HOST = 'patchman.c488z2dafhwr.us-east-1.rds.amazonaws.com'
 DB_NAME = 'patchman'
 DB_USER = 'patchman'
-DB_PASSWORD = 'patchman'
+DB_PASSWORD = 'password'
 SELECT_QUERY_OLD_HOSTS = """SELECT hosts_host.hostname
 FROM hosts_host
 LEFT JOIN operatingsystems_os ON operatingsystems_os.id=hosts_host.os_id

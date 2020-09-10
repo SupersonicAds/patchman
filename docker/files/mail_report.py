@@ -8,10 +8,10 @@ MAIL_FROM = 'Patchman <patchman@example.com>'
 MAIL_TO = 'Receiver <to@example.com>'
 MAIL_CC = 'Copy To <cc@@example.com>'
 
-DB_HOST = 'database'
+DB_HOST = 'patchman.c488z2dafhwr.us-east-1.rds.amazonaws.com'
 DB_NAME = 'patchman'
 DB_USER = 'patchman'
-DB_PASSWORD = 'patchman'
+DB_PASSWORD = 'password'
 SELECT_QUERY_PENDING_REBOOT = """SELECT hosts_host.hostname,
        DATE_FORMAT(hosts_host.updated_at, "%Y-%m-%d"),
        operatingsystems_os.name
