@@ -13,8 +13,8 @@ DATABASES = {
        'ENGINE': 'django.db.backends.mysql',
        'NAME': 'patchman',
        'USER': 'patchman',
-       'PASSWORD': 'password',
-       'HOST': 'patchman.c488z2dafhwr.us-east-1.rds.amazonaws.com',
+       'PASSWORD': 'patchman',
+       'HOST': 'database',
        'PORT': '3306',
        'STORAGE_ENGINE': 'INNODB',
        'CHARSET': 'utf8'

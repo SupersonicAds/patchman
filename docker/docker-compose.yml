@@ -13,3 +13,16 @@ services:
       - ./files/patchman.conf:/etc/apache2/conf-available/patchman.conf
       - ./files/mail_report.py:/mail_report.py
       - ./files/remove_old_hosts.py:/remove_old_hosts.py
+
+  database:
+    image: mysql:5.7
+    restart: always
+    command: --init-file /init.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'PLEASE_CHANGE_ME_TO_UNIQUE_SECURE_PASSWORD'
+    volumes:
+      - ./files/init.sql:/init.sql
+      - my-db:/var/lib/mysql
+
+volumes:
+  my-db:
